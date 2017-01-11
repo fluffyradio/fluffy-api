@@ -1,0 +1,6 @@
+package: github.com/fluffyradio/fluffy-api
+import:
+- package: github.com/labstack/echo
+  version: ~3.0.3
+- package: github.com/namsral/flag
+  version: ~1.7.4-pre
