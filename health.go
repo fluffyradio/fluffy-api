@@ -3,8 +3,8 @@ package main
 import "github.com/labstack/echo"
 import "net/http"
 
-// getHealth returns an HTTP handler that provides health information
-func getHealth(c echo.Context) error {
+// health returns an HTTP handler that provides health information
+func health(c echo.Context) error {
 	h := &Health{"Fluffy Radio Api", "1.0.0", "Just Keep Fluffing!"}
 	return c.JSON(http.StatusOK, h)
 }

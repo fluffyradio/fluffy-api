@@ -10,17 +10,23 @@ import (
 )
 
 var productionMode bool
+var spacialToken string
 
 func main() {
 	fmt.Println("Initializing server...")
 	e := echo.New()
 
 	flag.BoolVar(&productionMode, "productionMode", false, "False for Debug mode, otherwise True")
+	flag.StringVar(&spacialToken, "spacialToken", "", "Authentication token for Spacial Audio")
 	flag.Parse()
 
 	if productionMode == false {
 		fmt.Println("Running in Debug Mode!")
 		e.Debug = true
+	}
+
+	if spacialToken == "" {
+		e.Logger.Panic("Spacial Token not provided, exiting.")
 	}
 
 	fmt.Println("Loading middleware...")
@@ -43,5 +49,7 @@ func registerMiddleware(e *echo.Echo) {
 
 func registerHandlers(e *echo.Echo) {
 	// Route => handler
-	e.GET("/", getHealth)
+	e.GET("/", health)
+	e.GET("/songs", songs)
+	e.GET("/songs/current", currentSong)
 }
