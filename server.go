@@ -38,6 +38,8 @@ func registerMiddleware(e *echo.Echo) {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.Gzip())
+	e.Use(middleware.CORS())
 }
 
 func registerHandlers(e *echo.Echo) {
