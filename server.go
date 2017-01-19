@@ -1,8 +1,7 @@
+// The Fluffy Radio API
 package main
 
 import (
-	"net/http"
-
 	"fmt"
 
 	"github.com/labstack/echo"
@@ -44,14 +43,5 @@ func registerMiddleware(e *echo.Echo) {
 
 func registerHandlers(e *echo.Echo) {
 	// Route => handler
-	e.GET("/", func(c echo.Context) error {
-		h := &Health{"Fluffy Radio Api", "1.0.0", "Just Keep Fluffing!"}
-		return c.JSON(http.StatusOK, h)
-	})
-}
-
-type Health struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
-	Message string `json:"message"`
+	e.GET("/", getHealth)
 }
