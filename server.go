@@ -36,7 +36,7 @@ func main() {
 	registerHandlers(e)
 
 	fmt.Println("Starting server...")
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func registerMiddleware(e *echo.Echo) {
