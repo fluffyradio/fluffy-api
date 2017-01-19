@@ -1,0 +1,9 @@
+applications:
+- name: api.fluffyradio.com
+  buildpack: go_buildpack
+  memory: 20M
+  disk_quota: 24M
+  host: api
+  domain: fluffyradio.com
+  stack: cflinuxfs2
+  instances: 1
