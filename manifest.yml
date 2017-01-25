@@ -7,4 +7,5 @@ applications:
   domain: fluffyradio.com
   stack: cflinuxfs2
   instances: 1
-  command: fluffy-api -productionMode=true -spacialToken=
+  env:
+    PRODUCTION_MODE: true

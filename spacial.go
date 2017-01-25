@@ -13,8 +13,12 @@ import (
 	"github.com/labstack/echo"
 )
 
-// FluffyAPI is a string representing the Spacial Audio URL for interacting with the control system
-const FluffyAPI = "http://widgets-proxy.cloudapp.net/webapi/station/65655/"
+// FluffyAPIURL is a string representing the Spacial Audio URL for interacting with the control system
+const FluffyAPIURL = "http://widgets-proxy.cloudapp.net/webapi/station/"
+
+func getAPIURL() string {
+	return FluffyAPIURL + *spacialID + "/"
+}
 
 type (
 	// Song represents an instance of a song from spacial
@@ -36,7 +40,7 @@ type (
 // songs returns an array of songs in the library
 func songs(c echo.Context) error {
 	// Get current song
-	res, err := http.Get(FluffyAPI + "/library?format=json&start=0&top=500&mediaTypeCodes=MUS&token=" + spacialToken)
+	res, err := http.Get(getAPIURL() + "/library?format=json&start=0&top=500&mediaTypeCodes=MUS&token=" + *spacialToken)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +62,7 @@ func songs(c echo.Context) error {
 	}
 
 	// Log the response from spacial
-	if !productionMode {
+	if !*productionMode {
 		fmt.Println(data)
 	}
 	return c.JSON(http.StatusOK, data)
@@ -68,7 +72,7 @@ func songs(c echo.Context) error {
 func currentSong(c echo.Context) error {
 
 	// Get current song
-	res, err := http.Get(FluffyAPI + "/history/npe?format=json&token=" + spacialToken)
+	res, err := http.Get(getAPIURL() + "/history/npe?format=json&token=" + *spacialToken)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -90,7 +94,7 @@ func currentSong(c echo.Context) error {
 	}
 
 	// Log the response from spacial
-	if !productionMode {
+	if !*productionMode {
 		fmt.Println(data)
 	}
 
@@ -123,7 +127,7 @@ func requestSong(c echo.Context) error {
 	}
 
 	// Call Spacial
-	res, err := http.Post(FluffyAPI+"/request/"+id+"?format=json&token="+spacialToken, "text/plain", strings.NewReader(""))
+	res, err := http.Post(getAPIURL()+"/request/"+id+"?format=json&token="+*spacialToken, "text/plain", strings.NewReader(""))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
@@ -152,7 +156,7 @@ func requestSong(c echo.Context) error {
 	}
 
 	// Log the response from spacial
-	if !productionMode {
+	if !*productionMode {
 		fmt.Println(data)
 	}
 

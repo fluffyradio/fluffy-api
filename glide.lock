@@ -1,6 +1,14 @@
-hash: a4cceb688e03163f662ea209a224912d318933f44c87a50fa8652afc24cce8c3
-updated: 2017-01-10T22:36:25.433282725-05:00
+hash: 3e8377d4c6b5d0f435361eb520ee7772df8535072533088696f43cdea7a4dd47
+updated: 2017-01-25T13:22:24.794168582-05:00
 imports:
+- name: github.com/alecthomas/kingpin
+  version: e9044be3ab2a8e11d4e1f418d12f0790d57e8d70
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
 - name: github.com/dgrijalva/jwt-go
   version: a601269ab70c205d26370c16f7c81e9017c14e04
 - name: github.com/labstack/echo

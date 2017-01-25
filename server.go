@@ -4,29 +4,27 @@ package main
 import (
 	"fmt"
 
+	"github.com/alecthomas/kingpin"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/namsral/flag"
 )
 
-var productionMode bool
-var spacialToken string
+var (
+	productionMode = kingpin.Flag("prod-mode", "Run the server in production mode.").Envar("PRODUCTION_MODE").Default("false").Bool()
+	port           = kingpin.Flag("port", "HTTP port for the server to run on.").Envar("PORT").Default("8080").String()
+	spacialID      = kingpin.Flag("spacial-id", "The Spacial Audio station ID.").Envar("SPACIAL_ID").Required().String()
+	spacialToken   = kingpin.Flag("spacial-token", "The Spacial Audio API token.").Envar("SPACIAL_TOKEN").Required().String()
+)
 
 func main() {
 	fmt.Println("Initializing server...")
 	e := echo.New()
 
-	flag.BoolVar(&productionMode, "productionMode", false, "False for Debug mode, otherwise True")
-	flag.StringVar(&spacialToken, "spacialToken", "", "Authentication token for Spacial Audio")
-	flag.Parse()
+	kingpin.Parse()
 
-	if productionMode == false {
+	if *productionMode == false {
 		fmt.Println("Running in Debug Mode!")
 		e.Debug = true
-	}
-
-	if spacialToken == "" {
-		e.Logger.Panic("Spacial Token not provided, exiting.")
 	}
 
 	fmt.Println("Loading middleware...")
@@ -36,7 +34,7 @@ func main() {
 	registerHandlers(e)
 
 	fmt.Println("Starting server...")
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":" + *port))
 }
 
 func registerMiddleware(e *echo.Echo) {
