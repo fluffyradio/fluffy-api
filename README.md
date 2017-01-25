@@ -1,1 +1,2 @@
 [![Build Status](https://travis-ci.org/fluffyradio/fluffy-api.svg?branch=master)](https://travis-ci.org/fluffyradio/fluffy-api)
+[![Build status](https://ci.appveyor.com/api/projects/status/585aaa7uq19vtgkf?svg=true)](https://ci.appveyor.com/project/brentpabst/fluffy-api)
