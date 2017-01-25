@@ -1,0 +1,19 @@
+version: 1.0.{build}
+platform: x64
+pull_requests:
+  do_not_increment_build_number: true
+clone_depth: 1
+clone_folder: c:\gopath\src\github.com\fluffyradio\fluffy-api
+environment:
+  GOPATH: c:\gopath
+install:
+- echo %PATH%
+- echo %GOPATH%
+- set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+- go version
+- go env
+- go get -u github.com/Masterminds/glide
+- glide install
+build_script:
+- go build
+- go test
