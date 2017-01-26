@@ -1,9 +1,9 @@
-# Fluffy Radio Api [![Twitter Follow](https://img.shields.io/twitter/follow/fluffy_radio.svg?style=social&label=Follow)]()
+# Fluffy Radio Api [![Twitter Follow](https://img.shields.io/twitter/follow/fluffy_radio.svg?style=social&label=Follow)](https://www.twitter.com/fluffy_radio)
 A wrapper API for the Spacial Audio Cloud API
 
 | Linux Build | Windows Build | License |
 | ----------- | ------------- | ------- |
-| [![Build Status](https://img.shields.io/travis/fluffyradio/fluffy-api.svg)](https://travis-ci.org/fluffyradio/fluffy-api) | [![Build status](https://img.shields.io/appveyor/ci/brentpabst/fluffy-api.svg)](https://ci.appveyor.com/project/brentpabst/fluffy-api) | [![license](https://img.shields.io/github/license/fluffyradio/fluffy-api.svg)]() |
+| [![Build Status](https://img.shields.io/travis/fluffyradio/fluffy-api.svg)](https://travis-ci.org/fluffyradio/fluffy-api) | [![Build status](https://img.shields.io/appveyor/ci/brentpabst/fluffy-api.svg)](https://ci.appveyor.com/project/brentpabst/fluffy-api) | [![license](https://img.shields.io/github/license/fluffyradio/fluffy-api.svg)](LICENSE) |
 
 This API is designed to wrap the somewhat ugly and non-standard Spacial Audio Cloud API.  The wrapper is built in Go and proxies requests to Spacial Audio.  The API is publised to Pivotal Web Services.
 
@@ -18,11 +18,13 @@ There are a few things you need to do before you begin working on the project.
 
 ### Installing
 A few things have to be done to run the API.  Ensure you have `git clone`'d the site first.
+
 1. Run `glide install`
 1. Run `go build`
 1. Run `./fluffy-api --spacial-id=SPACIALSTATIONID --spacial-token=SPACIALSTATIONTOKEN`
 
 ## Running Tests
+
 1. Run `go test`
 
 ## Deployment
@@ -35,7 +37,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
-* **Brent Pabst** - Initial work* - [brentpabst](https://github.com/brentpabst)
+* **Brent Pabst** - Initial work - [brentpabst](https://github.com/brentpabst)
 
 See also the list of [contributors](https://github.com/203solutions/203solutions.github.io/contributors) who participated in this project.
 
