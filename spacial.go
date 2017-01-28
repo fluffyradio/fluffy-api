@@ -28,6 +28,7 @@ type (
 		Title    string `json:"title"`
 		Album    string `json:"album"`
 		AlbumArt string `json:"album_art_url"`
+		Website  string `json:"website_url"`
 	}
 
 	// RequestStatus represents an instance of the status of a request
@@ -39,8 +40,21 @@ type (
 
 // songs returns an array of songs in the library
 func songs(c echo.Context) error {
+	// Parse query params
+	take := c.QueryParam("take")
+	top := c.QueryParam("top")
+	q := c.QueryParam("q")
+
+	if take == "" {
+		take = "0"
+	}
+
+	if top == "" {
+		top = "10"
+	}
+
 	// Get current song
-	res, err := http.Get(getAPIURL() + "/library?format=json&start=0&top=500&mediaTypeCodes=MUS&token=" + *spacialToken)
+	res, err := http.Get(getAPIURL() + "/library?format=json&start=" + take + "&top=" + top + "&search=" + q + "&mediaTypeCodes=MUS&token=" + *spacialToken)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -65,7 +79,29 @@ func songs(c echo.Context) error {
 	if !*productionMode {
 		fmt.Println(data)
 	}
-	return c.JSON(http.StatusOK, data)
+
+	// Convert the array into a []Song
+	songs := make([]Song, len(data))
+	for i, v := range data {
+		r := Song{}
+		r.ID = v["MediaItemId"].(string)
+		r.Artist = v["Artist"].(string)
+		r.Title = v["Title"].(string)
+		r.Album = v["Album"].(string)
+
+		if v["Picture"] != nil {
+			r.AlbumArt = v["Picture"].(string)
+		}
+
+		if v["Website"] != nil {
+			r.Website = v["Website"].(string)
+		}
+
+		songs[i] = r
+	}
+
+	//Return object
+	return c.JSON(http.StatusOK, songs)
 }
 
 // currentSong returns the currently playing song
@@ -110,6 +146,10 @@ func currentSong(c echo.Context) error {
 
 	if song["Picture"] != nil {
 		r.AlbumArt = song["Picture"].(string)
+	}
+
+	if song["Website"] != nil {
+		r.Website = song["Website"].(string)
 	}
 
 	// Return the result
