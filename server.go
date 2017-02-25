@@ -50,5 +50,5 @@ func registerHandlers(e *echo.Echo) {
 	e.GET("/", health)
 	e.GET("/songs", songs)
 	e.GET("/songs/current", currentSong)
-	e.PUT("/requests/:id", requestSong)
+	e.POST("/requests/:id", requestSong)
 }
