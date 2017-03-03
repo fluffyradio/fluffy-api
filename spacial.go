@@ -10,6 +10,8 @@ import (
 
 	"strings"
 
+	"net/url"
+
 	"github.com/labstack/echo"
 )
 
@@ -54,7 +56,7 @@ func songs(c echo.Context) error {
 	}
 
 	// Get current song
-	res, err := http.Get(getAPIURL() + "/library?format=json&start=" + take + "&top=" + top + "&search=" + q + "&mediaTypeCodes=MUS&token=" + *spacialToken)
+	res, err := http.Get(getAPIURL() + "/library?format=json&start=" + take + "&top=" + top + "&search=" + url.QueryEscape(q) + "&mediaTypeCodes=MUS&token=" + *spacialToken)
 	if err != nil {
 		log.Fatal(err)
 	}
