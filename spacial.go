@@ -17,6 +17,7 @@ import (
 
 // FluffyAPIURL is a string representing the Spacial Audio URL for interacting with the control system
 const FluffyAPIURL = "http://widgets-proxy.cloudapp.net/webapi/station/"
+const FluffyLogoURL = "https://s3.amazonaws.com/fluffy-radio/fluffy-radio-large.png"
 
 func getAPIURL() string {
 	return FluffyAPIURL + *spacialID + "/"
@@ -93,6 +94,8 @@ func songs(c echo.Context) error {
 
 		if v["Picture"] != nil {
 			r.AlbumArt = v["Picture"].(string)
+		} else {
+			r.AlbumArt = FluffyLogoURL
 		}
 
 		if v["Website"] != nil {
@@ -148,6 +151,8 @@ func currentSong(c echo.Context) error {
 
 	if song["Picture"] != nil {
 		r.AlbumArt = song["Picture"].(string)
+	} else {
+		r.AlbumArt = FluffyLogoURL
 	}
 
 	if song["Website"] != nil {
